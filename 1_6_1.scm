@@ -1,0 +1,10 @@
+(define (new_if prediceted then_clause else_clause)
+	(cond (prediceted then_clause)
+		(else else_clause)))
+
+(define (abs x) (new_if(< x 0)(- x)x))
+(define (average x y)(/ (+ x y) 2))
+(define (good-enough? guess x) (< (abs(- guess (/ x guess))) 0.0001))
+(define (improve guess x) (average guess (/ x guess)))
+(define (try guess x) (new_if (good-enough? guess x)guess(try (improve guess x) x)))
+(define (sqrt x) (try 1 x))
